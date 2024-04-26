@@ -1,4 +1,4 @@
-# RAEDME.md
+# README.md
 
 Installing:    
     
