@@ -52,11 +52,11 @@ sh run_server.sh
 
 # запуск кода загрузки данных и логирования в MLFlow
 cd mlflow_server
-sh run_experiment.py
+python3 run_experiment.py
 ``` 
     
 Параметры:    
     
 S3 Bucket name: `s3-student-mle-20240325-4062b25c06`    
-MLFlow run name:  `Спринт 3/9: 2 спринт → Тема 5/5: Проект`    
-MLFlow run id: `97e36a4c008244f594b8213adc656d15`
+MLFlow experiment name:  `Спринт 3/9: 2 спринт → Тема 5/5: Проект`    
+MLFlow run name: `ETL`

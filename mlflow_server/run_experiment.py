@@ -12,8 +12,24 @@ import json
 import pandas as pd
 import requests
 import warnings
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+from sklearn.model_selection import train_test_split
 
 # вспомогательные функции
+
+def get_engine():
+    load_dotenv()
+    return create_engine(f"postgresql://{os.getenv('DB_DESTINATION_USER')}:"
+                        f"{os.getenv('DB_DESTINATION_PASSWORD')}@"
+                        f"{os.getenv('DB_DESTINATION_HOST')}:"
+                        f"{os.getenv('DB_DESTINATION_PORT')}/"
+                        f"{os.getenv('DB_DESTINATION_NAME')}"
+                        )
+
+def load_df(table_name):
+    return pd.read_sql(sql=f'SELECT * FROM {table_name}', con=get_engine())
+
 def load_data(path, loader):
     with open(path, 'r') as file:
         return  loader(file)
@@ -33,8 +49,16 @@ def check_mlflow_server(url):
 
 warnings.filterwarnings("ignore")
 
+# задание таблицы Postgres с данными, имени модели, названия эксперимента, имени запуска
+TABLE_NAME = "clean_flats"
+REGISTRY_MODEL_NAME = 'model_sprint_2'
+EXPERIMENT_NAME = 'Спринт 3/9: 2 спринт → Тема 5/5: Проект'
+RUN_NAME = "ETL: stage 1"
+RANDOM_STATE = 42
+target = 'price'
+
 # задание каталогов к параметрам, модели, метрикам
-project_path = './mlflow_server'
+project_path = '.'
 path_to_params = project_path + '/models/params.yaml'
 path_to_model = project_path + '/models/fitted_model.pkl'
 path_to_metrics = project_path + '/results/cv_res.json'
@@ -43,13 +67,8 @@ path_to_metrics = project_path + '/results/cv_res.json'
 params = load_data(path_to_params, yaml.safe_load)
 model = joblib.load(path_to_model)
 metrics = load_data(path_to_metrics, json.load)
-X_test = pd.read_csv(project_path + '/data/x_test.csv')
-
-# задание таблицы Postgres с данными, имени модели, названия эксперимента, имени запуска
-TABLE_NAME = "clean_flats"
-REGISTRY_MODEL_NAME = 'model_sprint_2'
-EXPERIMENT_NAME = 'Спринт 3/9: 2 спринт → Тема 5/5: Проект'
-RUN_NAME = "ETL"
+df = load_df(TABLE_NAME)
+_, X_test, _, _ = train_test_split(df.drop(target, axis=1), df[target], random_state=RANDOM_STATE) 
 
 # проверка статуса сервера MLFlow
 if check_mlflow_server(os.getenv('TRACKING_SERVER_CONN')):
@@ -59,7 +78,7 @@ if check_mlflow_server(os.getenv('TRACKING_SERVER_CONN')):
     prediction = model.predict(X_test)
     signature = mlflow.models.infer_signature(X_test, prediction)
     input_example = X_test[:10]
-    pip_requirements = 'requirements.txt'
+    pip_requirements = '../requirements.txt'
 
     # создание / проверка актуальности эксперимента
     experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
