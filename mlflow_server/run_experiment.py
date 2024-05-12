@@ -53,9 +53,11 @@ warnings.filterwarnings("ignore")
 TABLE_NAME = "clean_flats"
 REGISTRY_MODEL_NAME = 'model_sprint_2'
 EXPERIMENT_NAME = 'Спринт 3/9: 2 спринт → Тема 5/5: Проект'
-RUN_NAME = "ETL: stage 1"
+RUN_NAME = "1 этап: ETL"
 RANDOM_STATE = 42
 target = 'price'
+
+os.chdir(r"/home/mle-user/mle-project/mle-mlflow/mle-project-sprint-2-v001/mlflow_server/")
 
 # задание каталогов к параметрам, модели, метрикам
 project_path = '.'
