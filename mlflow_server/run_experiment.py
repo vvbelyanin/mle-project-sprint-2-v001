@@ -51,7 +51,7 @@ warnings.filterwarnings("ignore")
 
 # задание таблицы Postgres с данными, имени модели, названия эксперимента, имени запуска
 TABLE_NAME = "clean_flats"
-REGISTRY_MODEL_NAME = 'model_sprint_2'
+REGISTRY_MODEL_NAME = 'model_sprint_2_stage1'
 EXPERIMENT_NAME = 'Спринт 3/9: 2 спринт → Тема 5/5: Проект'
 RUN_NAME = "1 этап: ETL"
 RANDOM_STATE = 42
