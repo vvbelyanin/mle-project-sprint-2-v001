@@ -6,7 +6,7 @@ README.md
 Усовершенствование базовой модели методами конструирования и отбора признаков, поиск оптимальных гиперпараметров модели в среде MLFlow.
 Необходимо улучшить основную метрику проекта, документируя все эксперименты и объекты в MLflow. 
 
-Подробный план проекта приведен в файле Jupyter Notebook /model_improvement/[mle-project-sprint-2-v002.ipynb](https://github.com/vvbelyanin/mle-project-sprint-2-v001/blob/main/model_improvement/mle-project-sprint-2-v002.ipynb)
+Подробный план проекта приведен в файле Jupyter Notebook /model_improvement/[mle-project-sprint-2-v003.ipynb](https://github.com/vvbelyanin/mle-project-sprint-2-v001/blob/main/model_improvement/mle-project-sprint-2-v003.ipynb)
 
 **Краткий план проекта**    
 - Этап 1. Разворачивание MLflow Tracking Server и MLflow Model Registry. Регистрация существующей модели    
