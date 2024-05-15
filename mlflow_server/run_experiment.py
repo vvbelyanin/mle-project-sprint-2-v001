@@ -57,7 +57,7 @@ RUN_NAME = "1 этап: ETL"
 RANDOM_STATE = 42
 target = 'price'
 
-os.chdir(r"/home/mle-user/mle-project/mle-mlflow/mle-project-sprint-2-v001/mlflow_server/")
+#os.chdir(r"/home/mle-user/mle-project/mle-mlflow/mle-project-sprint-2-v001/mlflow_server/")
 
 # задание каталогов к параметрам, модели, метрикам
 project_path = '.'
