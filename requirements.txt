@@ -22,3 +22,6 @@ psycopg2-binary==2.9.9
 phik==0.12.4
 geopy==2.4.1
 statsmodels==0.14.2
+cmaes==0.10.0
+shap==0.45.1
+slicer==0.0.8
